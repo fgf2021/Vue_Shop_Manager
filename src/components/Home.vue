@@ -132,26 +132,30 @@ export default {
 
 <style lang="less" scoped>
 .el-header {
-  background-color: #666;
+  background-color: #373d41;
+  padding: 0;
   .logo {
     width: 400px;
     height: 60px;
-    font-size: 25px;
+    font-size: 22px;
+    font-weight: 700;
     color: #fff;
     line-height: 60px;
     float: left;
     img {
-      width: 70px;
+      width: 66px;
       height: 100%;
       vertical-align: top;
     }
     span {
       margin-left: 14px;
+      letter-spacing: 2px;
     }
   }
   .el-button {
     float: right;
     margin-top: 10px;
+    margin-right: 10px;
   }
 }
 .el-aside {
@@ -161,7 +165,7 @@ export default {
     -webkit-transition: all 0.5s;
      -o-transition:all 0.5s;
   .toggle{
-      background-color: #999;
+      background-color: #4a5064;
       color: white;
       font-size: 24px;
       text-align: center;
