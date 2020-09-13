@@ -48,8 +48,8 @@ export default {
       };
       return {
         ruleForm: {
-          username: '',
-          password: ''
+          username: 'admin',
+          password: '123456'
         },
         rules: {
           username: [
@@ -104,13 +104,13 @@ export default {
 
   .login_box {
     height: 300px;
-    width: 450px;
+    width: 550px;
     background-color: #fff;
     border-radius: 4px;
     position: absolute;
     left: 50%;
     top: 50%;
-    margin-left: -225px;
+    margin-left: -275px;
     margin-top: -150px;
 
     .avatar_box {
