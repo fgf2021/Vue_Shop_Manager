@@ -5,7 +5,7 @@
         <img src="../assets/img/logo.png" alt="图片加载失败" />
         <span>电商后台管理系统</span>
       </div>
-      <el-button type="info" round @click="exit">退出登录</el-button>
+      <el-button type="info"  @click="exit">退出登录</el-button>
     </el-header>
     <el-container>
       <el-aside :width="isCollapse ? '64px' : '200px'">
@@ -23,6 +23,7 @@
           :collapse="isCollapse"
           :collapse-transition="false"
           router
+          :default-active="$route.path"
         >
           <el-submenu index="1">
             <template slot="title">
