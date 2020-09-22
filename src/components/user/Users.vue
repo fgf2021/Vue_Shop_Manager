@@ -35,8 +35,8 @@
             <el-tooltip effect="dark" content="删除用户" placement="top" :enterable="false">
               <el-button type="danger" icon="el-icon-delete" size="mini" @click="dele(scope)"></el-button>
             </el-tooltip>
-            <el-tooltip effect="dark" content="分配角色" placement="top" :enterable="false">
-              <el-button type="warning" icon="el-icon-setting" size="mini"></el-button>
+            <el-tooltip effect="dark" content="分配角色" placement="top"  :enterable="false" >
+              <el-button type="warning" icon="el-icon-setting" size="mini" @click="end(scope.row)"></el-button>
             </el-tooltip>
           </template>
         </el-table-column>
@@ -86,6 +86,7 @@
       width="30%"
       :close-on-press-escape="false"
       :close-on-click-modal="false"
+      
     >
       <el-form :model="editruleForm" :rules="editrules" ref="editruleForm" label-width="90px">
         <el-form-item label="用户名" prop="username">
@@ -103,7 +104,30 @@
         <el-button type="primary" @click="editsub('editruleForm')">确 定</el-button>
       </span>
     </el-dialog>
-
+    <el-dialog
+    title="分配角色"
+    :visible.sync="enddialogVisible"
+    width="30%"
+    @close="setRoleDialogClosed"
+    >
+    <div>
+      <p>当前的用户:{{userInfo.username}}</p>
+      <p>当前的角色:{{userInfo.role_name}}</p>
+      <p>分配新角色: <el-select v-model="selectedRoleId" placeholder="请选择">
+    <el-option
+      v-for="item in rolesLsit"
+      :key="item.id"
+      :label="item.roleName"
+      :value="item.id">
+    </el-option>
+  </el-select>
+  </p>
+    </div>
+    <span slot="footer" class="dialog-footer">
+    <el-button @click="enddialogVisible = false">取 消</el-button>
+    <el-button type="primary" @click="saveRoleInfo">确 定</el-button>
+  </span>
+</el-dialog>
   </div>
 </template>
 
@@ -111,6 +135,10 @@
 export default {
   data() {
     return {
+      selectedRoleId:'',
+      rolesLsit:[],
+      userInfo:{},
+      enddialogVisible:false,
       queryInfo: {
         query: "",
         pagenum: 1,
@@ -315,7 +343,7 @@ export default {
       });
     },
 
-        dele(scope) {
+    dele(scope) {
         this.$confirm('此操作将永久删除该用户, 是否继续?', '提示', {
           confirmButtonText: '确定',
           cancelButtonText: '取消',
@@ -346,8 +374,44 @@ export default {
             showClose: true
           });          
         });
+      },
+    async end(scope){
+        this.userInfo = scope;
+         const { data: res } = await this.$http.get('roles')
+      if (res.meta.status !== 200) {
+        return this.$message({
+            type: 'error',
+            message: '获取信息失败',
+            center: true,
+            showClose: true
+          });
       }
+       this.rolesLsit = res.data
+        this.enddialogVisible=true;  
+      },
+     async saveRoleInfo(){
+         if (!this.selectedRoleId) {
+        return this.$message.error('请选择要分配的角色')
+      }
+      const { data: res } = await this.$http.put(`users/${this.userInfo.id}/role`, { rid: this.selectedRoleId })
+      if (res.meta.status !== 200) {
+        return this.$message({
+            type: 'error',
+            message: '更新用户角色失败',
+            center: true,
+            showClose: true
+          });
+      }
+      this.$message.success('更新角色成功！')
+      this.getUserList()
+      this.enddialogVisible = false
+      },
+      setRoleDialogClosed () {
+      this.selectedRoleId = ''
+      this.userInfo = {}
+    }
   },
+
 };
 </script>
 

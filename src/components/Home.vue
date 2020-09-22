@@ -165,6 +165,7 @@ export default {
     -moz-transition: all 0.5s;
     -webkit-transition: all 0.5s;
      -o-transition:all 0.5s;
+     overflow-x: hidden;
   .toggle{
       background-color: #4a5064;
       color: white;
