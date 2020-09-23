@@ -3,6 +3,7 @@ html, body, #app,.el-container{
     margin:0;
     padding: 0;
     min-width: 1366px;
+    overflow-y: hidden;
 } 
 
 .el-breadcrumb{
@@ -15,4 +16,7 @@ html, body, #app,.el-container{
 
 .el-pagination{
     margin-top: 15px;
+}
+ .el-cascader-panel{ 
+     height: 200px; 
 }
