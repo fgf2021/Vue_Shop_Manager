@@ -104,13 +104,13 @@ export default {
 
   .login_box {
     height: 300px;
-    width: 550px;
+    width: 450px;
     background-color: #fff;
     border-radius: 4px;
     position: absolute;
     left: 50%;
     top: 50%;
-    margin-left: -275px;
+    margin-left: -225px;
     margin-top: -150px;
 
     .avatar_box {

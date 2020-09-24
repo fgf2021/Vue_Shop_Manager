@@ -5,7 +5,6 @@ html, body, #app,.el-container{
     min-width: 1366px;
     overflow-y: hidden;
 } 
-
 .el-breadcrumb{
     margin-bottom: 15px;
 }

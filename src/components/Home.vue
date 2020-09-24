@@ -176,5 +176,6 @@ export default {
 }
 .el-main {
   background-color: #eaedf1;
+  overflow-y: scroll;
 }
 </style>
